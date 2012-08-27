@@ -1,5 +1,6 @@
 Exchange::Application.routes.draw do
   resources :users
+  resources :sessions, :only => [:new, :create, :destroy]
   
   get "opening_pages/home"
   get "opening_pages/help"
@@ -7,6 +8,8 @@ Exchange::Application.routes.draw do
   get "opening_pages/contact"
   
   match '/signup', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy', :via => :delete
   match '/help', :to => 'opening_pages#help'
   match '/about', :to => 'opening_pages#about'
   match '/contact', :to => 'opening_pages#contact'
